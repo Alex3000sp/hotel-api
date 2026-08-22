@@ -1,0 +1,64 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: hotel-api
+  sql:
+    init:
+      mode: always
+
+  config:
+    import: optional:file:.env[.properties]
+
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    driver-class-name: oracle.jdbc.OracleDriver
+
+    hikari:
+      max-lifetime: 1000000
+      keepalive-time: 30000
+      maximum-pool-size: 10
+      data-source-properties:
+        oracle.jdbc.defaultConnectionValidation: LOCAL
+
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yml
+    enabled: true
+
+  jpa:
+    database-platform: org.hibernate.dialect.OracleDialect
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+logging:
+  level:
+    org.zalando.logbook.logbook: TRACE
+
+logbook:
+  format:
+    style: json
+  obfuscate:
+    headers:
+      - Authorization
+      - X-Api-Key
+      - Cookie
+    parameters:
+      - token
+      - password
+  predicate:
+    exclude:
+      - /actuator/**
+      - /v3/api-docs/**
+      - /swagger-ui/**
+      - /favicon.ico
+  write:
+    max-body-size:  10000
+
+
+
+
