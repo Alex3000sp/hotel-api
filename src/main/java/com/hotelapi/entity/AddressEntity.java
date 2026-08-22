@@ -1,5 +1,6 @@
 package com.hotelapi.entity;
 
+import com.hotelapi.common.enums.AddressType;
 import jakarta.persistence.*;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.AllArgsConstructor;
@@ -32,7 +33,8 @@ public class AddressEntity {
     private HotelEntity hotelId;
 
     @Column ( name = "TYPE")
-    private Integer type;
+    @Enumerated(EnumType.STRING)
+    private AddressType type;
 
     @Column ( name = "COUNTRY")
     private Integer country;

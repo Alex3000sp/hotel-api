@@ -1,5 +1,6 @@
 package com.hotelapi.entity;
 
+import com.hotelapi.common.enums.ContactType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,7 +32,8 @@ public class ContactEntity {
     private HotelEntity hotelId;
 
     @Column(name = "TYPE")
-    private Integer type;
+    @Enumerated(EnumType.STRING)
+    private ContactType type;
 
     @Column(name = "VALUE")
     private String value;
