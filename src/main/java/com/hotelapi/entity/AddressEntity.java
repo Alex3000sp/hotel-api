@@ -37,7 +37,7 @@ public class AddressEntity {
     private AddressType type;
 
     @Column ( name = "COUNTRY")
-    private Integer country;
+    private String country;
 
     @Column ( name = "REGION")
     private String region;
